@@ -35,7 +35,19 @@ public class Polygon {
     }
 
     boolean hasCriticalPoint() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int size = points.size();
+        for (int i = 0; i < size; i++) {
+            int i2 = (i + 1) % (size);
+            int i3 = (i + 2) % (size);
+            Point p1 = points.get(i);
+            Point p2 = points.get(i2);
+            Point p3 = points.get(i3);
+            boolean ccw = CCW(p1, p2, p3);
+            if (ccw) {
+                return true;
+            }
+        }
+        return false;
     }
     
 }
