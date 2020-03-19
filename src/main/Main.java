@@ -3,6 +3,10 @@ package main;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,20 +18,25 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<Polygon> polygons = new LinkedList<Polygon>();
         FileReader fr = null;
         try {
-            fr = new FileReader(new File("input.txt"));
+            Path currentRelativePath = Paths.get("");
+            String absolutePath = currentRelativePath.toAbsolutePath().toString();
+            String path = absolutePath + "/src/main/input.txt";
+            fr = new FileReader(new File(path));
             while(true){
                 System.out.println("novo polígono");
                 int lines; 
-                if((lines = fr.read()) != -1){
-                    System.out.println("linhas: " + lines);
-                    for (int i = 0; i < lines; i++) {
+                if((lines =  fr.read()) != -1){
+                    int lines_c = (char) lines;
+                    System.out.println("linhas: " + (char) lines_c);
+                    for (int i = 0; i < lines_c; i++) {
                         int coordinates;
                         if((coordinates = fr.read()) != -1){
-                            System.out.println("coordenates" + coordinates);
+                            int coordinates_c = (char) coordinates;
+                            System.out.println("coordenates" + coordinates_c);
                         }
                     }
                 }else{
